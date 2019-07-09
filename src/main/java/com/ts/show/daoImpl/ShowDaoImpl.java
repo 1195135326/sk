@@ -1,4 +1,4 @@
-package com.ts.show.DaoImpl;
+package com.ts.show.daoImpl;
 
 public class ShowDaoImpl {
 }
