@@ -1,4 +1,4 @@
-package com.sk.demo;
+package com.ts.app;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,10 +12,10 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @RestController
-public class DemoApplication {
+public class TaxSoftApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(TaxSoftApplication.class, args);
     }
 
     @GetMapping("/demo1")

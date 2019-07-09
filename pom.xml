@@ -8,11 +8,11 @@
         <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.sk</groupId>
-    <artifactId>demo</artifactId>
+    <groupId>com.ts</groupId>
+    <artifactId>TaxSoft</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
-    <description>Demo project for Spring Boot</description>
+    <name>TaxSoft</name>
+    <description>A project for TS</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -33,6 +33,12 @@
         <dependency>
             <groupId> org.springframework.boot </groupId>
             <artifactId> spring-boot-configuration-processor </artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.6</version>
         </dependency>
     </dependencies>
 
