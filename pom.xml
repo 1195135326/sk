@@ -94,6 +94,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -101,7 +104,6 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
             </plugin>
         </plugins>
