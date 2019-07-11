@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,10 +31,13 @@ public class TaxSoftApplication {
     }
 
     @RequestMapping(value = "/demo1")
+    @Transactional
     public String demo1(Map map)
     {
         String sCode = "";
-        sCode = SysDB.getStringValue(con,"select fname from s_test");
+        sCode = SysDB.getStringValue(con,"select fname from s_test where id=2");
+        SysDB.execute(con,"insert into s_test values (3,'slq1','时留旗1')");
+        sCode = SysDB.getStringValue(con,"select fname from s_test where id=2 ssasfa");
         System.out.println(sCode);
         map.put("name",sCode);
         return "sk";
