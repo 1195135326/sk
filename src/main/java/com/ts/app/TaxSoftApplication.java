@@ -1,5 +1,6 @@
 package com.ts.app;
 
+import com.ts.jdbc.SysDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 @SpringBootApplication
 @ComponentScan("com.ts")
+@Controller
 public class TaxSoftApplication {
     @Autowired
     private NamedParameterJdbcTemplate con;
@@ -31,8 +33,9 @@ public class TaxSoftApplication {
     public String demo1(Map map)
     {
         String sCode = "";
-
-        System.out.println("sss");
+        sCode = SysDB.getStringValue(con,"select fname from s_test");
+        System.out.println(sCode);
+        map.put("name",sCode);
         return "sk";
     }
 
