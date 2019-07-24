@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                alert(1);
+                $.get("/TaxSoft/test",function(data,status){
+                    alert("数据：" + data.name + "\n状态：" + status);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <p>Hello!${name}</p>
+    <button>测试 </button>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.ts.app;
 
+import com.ts.entity.User;
 import com.ts.jdbc.SysDB;
+import com.ts.system.newsManager.UI.Exceptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
@@ -35,12 +38,29 @@ public class TaxSoftApplication {
     public String demo1(Map map)
     {
         String sCode = "";
-        sCode = SysDB.getStringValue(con,"select fname from s_test where id=2");
-        SysDB.execute(con,"insert into s_test values (3,'slq1','时留旗1')");
-        sCode = SysDB.getStringValue(con,"select fname from s_test where id=2 ssasfa");
+        sCode = SysDB.getStringValue(con,"select fname from s_test where id=1");
+//        SysDB.execute(con,"insert into s_test values (3,'slq1','时留旗1')");
+//        sCode = SysDB.getStringValue(con,"select fname from s_test where id=2 ssasfa");
         System.out.println(sCode);
         map.put("name",sCode);
         return "sk";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/test")
+    public Exceptions test()
+    {
+        Exceptions es = new Exceptions();
+        try {
+            User user = new User();
+            user.setName("沈科test");
+          es.setObj(user);
+        }
+        catch (Exception e)
+        {
+            es.setErrotMes(e.getLocalizedMessage());
+        }
+        return es;
     }
 
 }
