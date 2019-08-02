@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
+    <title>后台管理</title>
+    <!-- Bootstrap -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <link href="../css/addminMange.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <!-- 按钮触发模态框 -->
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</button>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+
+                            <p>标题:<input type="text"></p>
+                            <p>新闻类别:
+                                <select name="news">
+                                    <option value="gongsi">公司新闻</option>
+                                    <option value="hangye">行业新闻</option>
+                                </select>
+                            </p>
+                            <p>是否热点新闻:
+                                <select name="choose">
+                                    <option value="yes">是</option>
+                                    <option value="no">否</option>
+                                </select>
+                            </p>
+                            <p>上传图片:<input type="file" class="file"></p>
+                            <p>发布时间:<input type="text" class="form-control"></p>
+                            <p>摘要:<input type="text"></p>
+                            <p>是否下架:
+                                <select name="choose">
+                                    <option value="yes">是</option>
+                                    <option value="no">否</option>
+                                </select>
+                            </p>
+                            <p>新闻内容:<textarea rows="3" cols="20"></textarea></p>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--修改-->
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-edit">修改</button>
+        <div class="modal fade" id="myModal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel-edit">修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+
+                            <p>标题:<input type="text"></p>
+                            <p>新闻类别:
+                                <select name="news">
+                                    <option value="gongsi">公司新闻</option>
+                                    <option value="hangye">行业新闻</option>
+                                </select>
+                            </p>
+                            <p>是否热点新闻:
+                                <select name="choose">
+                                    <option value="yes">是</option>
+                                    <option value="no">否</option>
+                                </select>
+                            </p>
+                            <p>上传图片:<input type="file" class="file"></p>
+                            <p>发布时间:<input type="text" class="form-control"></p>
+                            <p>摘要:<input type="text"></p>
+                            <p>是否下架:
+                                <select name="choose">
+                                    <option value="yes">是</option>
+                                    <option value="no">否</option>
+                                </select>
+                            </p>
+                            <p>新闻内容:<textarea rows="3" cols="20"></textarea></p>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">修改</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--删除-->
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-delete" onclick="delUser()">删除</button>
+            <div class="modal fade" id="myModal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel-delete">删除</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" >删除</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="table-responsive">
+    <table class="table">
+        <caption>响应式表格布局</caption>
+        <thead>
+        <tr>
+            <th>标题</th>
+            <th>新闻类别</th>
+            <th>是否热点新闻</th>
+            <th>图片</th>
+            <th>发布时间</th>
+            <th>摘要</th>
+            <th>是否下架</th>
+            <th>新闻内容</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--下面为分页-->
+<ul class="pagination" style="margin-left: 600px">
+    <li><a href="#">&laquo;</a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li class="disabled"><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul>
+</div>
+
+
+</body>
+</html>

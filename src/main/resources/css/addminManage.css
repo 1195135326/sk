@@ -1,0 +1,60 @@
+#company-logo{
+    background-color: darkblue;
+    height: 60px;
+    padding-top:10px;
+}
+#header-row{
+    height: 60px;
+    min-height: 50px;
+    max-height: 70px;
+}
+#shouzhan{
+    padding-top: 15px;
+}
+#gly-logo{
+    height: 50px;
+    text-align: center;
+    padding-top: 5px;
+}
+#gly-logo>img{
+    width: 10%;
+    margin-right: 5px;
+}
+#gly-logo>label{
+    margin-top:20px;
+}
+#header-row-col2{
+    padding-top:18px
+}
+#body-left{
+    background-color: #000000;
+    height: 700px;
+    text-align: center;
+    color: white;
+    min-height: 550px;
+    max-height: 800px;
+}
+#body-left>ul{
+    margin-top: 20px;
+    margin-left: 1px;
+}
+#body-left>ul>li>a>img{
+    padding-bottom:5px;
+    padding-right:5px;
+    color: white;
+}
+#body-right{
+    height: 700px;
+    min-height: 550px;
+    max-height: 800px;
+}
+#body-right-glzx{
+background-color: #5bc0de;
+    height: 50px
+}
+#body-right-glzx p{
+    color: #2e6da4;
+    margin-top:15px;
+    margin-left: 20px;
+}
+
