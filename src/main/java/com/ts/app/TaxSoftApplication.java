@@ -63,4 +63,9 @@ public class TaxSoftApplication {
         return es;
     }
 
+    @RequestMapping(value = "/console")
+    public String onTest()
+    {
+        return "/Admin/AdminManage";
+    }
 }
