@@ -1,6 +1,7 @@
 package com.ts.user.service;
 
 import com.ts.entity.ResultInfo;
+import com.ts.jdbc.SysDB;
 import com.ts.user.UI.UserInfo;
 import com.ts.user.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,14 @@ public class UserServiceImpl implements UserService
 
     @Override
     public ResultInfo searchAllUser(String sWhere, String sOrder, int pageIndex, int paheSize) {
-        return null;
+        ResultInfo rs = new ResultInfo();
+        try {
+            rs.setRows(dao.queryUser(sWhere, sOrder, pageIndex, paheSize));
+        }
+        catch (Exception e){
+            rs.setsErrorMsg(e.getLocalizedMessage());
+        }
+        return rs;
     }
 
     @Override

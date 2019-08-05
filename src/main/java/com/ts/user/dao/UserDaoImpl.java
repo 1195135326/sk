@@ -7,6 +7,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class UserDaoImpl implements UserDao {
@@ -35,7 +38,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ArrayList<UserInfo> queryUser(String sWhere, String sOrder, int pageIndex, int paheSize) throws Exception {
-        return null;
+    public List<Map<String,Object>> queryUser(String sWhere, String sOrder, int pageIndex, int paheSize) throws Exception {
+        return con.queryForList("select * from t_wage",new HashMap<>());
     }
 }

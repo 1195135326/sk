@@ -6,171 +6,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=yes">
     <title>后台管理</title>
     <!-- Bootstrap -->
-    <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../../static/js/jquery-1.11.3.min.js"></script>
-    <script src="../../static/js/bootstrap.min.js"></script>
-    <link href="../css/addminMange.css" rel="stylesheet">
+    <link href="/TaxSoft/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/TaxSoft/js/jquery-1.11.3.min.js"></script>
+    <script src="/TaxSoft/js/bootstrap.min.js"></script>
+    <script src="/TaxSoft/js/bootstrap-table.js"></script>
+    <link href="/TaxSoft/css/addminMange.css" rel="stylesheet">
+
 
 </head>
 
 <body>
-                        <div class="container-fluid">
-                            <!-- 按钮触发模态框 -->
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</button>
-                            <!-- 模态框（Modal） -->
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">新增</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                            <p>用户代码:<input type="text"></p>
-                                            <p>登录账号:<input type="text"></p>
-                                            <p>密码:<input type="password"></p>
-                                            <p>客户名称:<input type="text"></p>
-                                            <p>机构全称:<input type="text"></p>
-                                            <p>手机号码:<input type="text"></p>
-                                            <p>固定电话:<input type="text"></p>
-                                            <p>电子邮箱:<input type="text"></p>
-                                            <p>地址:<input type="text"></p>
-                                            <p>产品授权:<input type="checkbox" name="root" value="A">A产品
-                                                        <input type="checkbox" name="root" value="B">B产品
-                                                        <input type="checkbox" name="root" value="C">C产品
-                                                        <input type="checkbox" name="root" value="D">D产品
-                                            </p>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">确定</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <!--修改-->
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-edit">修改</button>
-                            <div class="modal fade" id="myModal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel-edit">修改</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <p>用户代码:<input type="text"></p>
-                                                <p>登录账号:<input type="text"></p>
-                                                <p>密码:<input type="password"></p>
-                                                <p>客户名称:<input type="text"></p>
-                                                <p>机构全称:<input type="text"></p>
-                                                <p>手机号码:<input type="text"></p>
-                                                <p>固定电话:<input type="text"></p>
-                                                <p>电子邮箱:<input type="text"></p>
-                                                <p>地址:<input type="text"></p>
-                                                <p>产品授权:<input type="checkbox" name="root" value="A">A产品
-                                                    <input type="checkbox" name="root" value="B">B产品
-                                                    <input type="checkbox" name="root" value="C">C产品
-                                                    <input type="checkbox" name="root" value="D">D产品
-                                                </p>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary">修改</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <!--删除-->
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-delete" onclick="delUser()">删除</button>
-                                <div class="modal fade" id="myModal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="myModalLabel-delete">删除</h4>
-                                            </div>
-                                            <div class="modal-body">
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" >删除</button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-            <div class="container-fluid">
-                        <div class="table-responsive">
-                            <table class="table">
-
-                                <thead>
-                                <tr>
-                                    <th>用户代码</th>
-                                    <th>登录账号</th>
-                                    <th>密码</th>
-                                    <th>客户名称</th>
-                                    <th>机构全称</th>
-                                    <th>手机号码</th>
-                                    <th>固定电话</th>
-                                    <th>电子邮箱</th>
-                                    <th>地址</th>
-                                    <th>产品授权</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+    <div class="container-fluid">
+        <!-- 按钮触发模态框 -->
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</button>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">新增</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                        <p>用户代码:<input type="text"></p>
+                        <p>登录账号:<input type="text"></p>
+                        <p>密码:<input type="password"></p>
+                        <p>客户名称:<input type="text"></p>
+                        <p>机构全称:<input type="text"></p>
+                        <p>手机号码:<input type="text"></p>
+                        <p>固定电话:<input type="text"></p>
+                        <p>电子邮箱:<input type="text"></p>
+                        <p>地址:<input type="text"></p>
+                        <p>产品授权:<input type="checkbox" name="root" value="A">A产品
+                                    <input type="checkbox" name="root" value="B">B产品
+                                    <input type="checkbox" name="root" value="C">C产品
+                                    <input type="checkbox" name="root" value="D">D产品
+                        </p>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">确定</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!--修改-->
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-edit">修改</button>
+        <div class="modal fade" id="myModal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel-edit">修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <p>用户代码:<input type="text"></p>
+                            <p>登录账号:<input type="text"></p>
+                            <p>密码:<input type="password"></p>
+                            <p>客户名称:<input type="text"></p>
+                            <p>机构全称:<input type="text"></p>
+                            <p>手机号码:<input type="text"></p>
+                            <p>固定电话:<input type="text"></p>
+                            <p>电子邮箱:<input type="text"></p>
+                            <p>地址:<input type="text"></p>
+                            <p>产品授权:<input type="checkbox" name="root" value="A">A产品
+                                <input type="checkbox" name="root" value="B">B产品
+                                <input type="checkbox" name="root" value="C">C产品
+                                <input type="checkbox" name="root" value="D">D产品
+                            </p>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">修改</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--删除-->
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal-delete" onclick="delUser()">删除</button>
+            <div class="modal fade" id="myModal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel-delete">删除</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" >删除</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+                <div class="table-responsive">
+                    <table class="table" id="mainTable">
+                    </table>
+
+                </div>
+    </div>
                         <!--下面为分页-->
     <div class="container-fluid">
                         <ul class="pagination" style="margin-left: 600px">
@@ -186,8 +132,74 @@
 
 
 <script>
-    function delUser(){
-        alert("删除成功")
+    $(document).ready(function(){
+        initTable();
+    });
+
+    function initTable(){
+        $('#mainTable').bootstrapTable('destroy');
+        $('#mainTable').bootstrapTable({
+            method: 'get',
+            // 若以post方式提交，需要补充contentType信息，否则分页参数无法传递到controller
+            //contentType: "application/x-www-form-urlencoded",
+
+            // 查询传入起始页码数，后台需要计算起始查询条数
+            url : "/TaxSoft/user/queryUser",
+            formatNoMatches : function() {
+                return '无符合条件的记录';
+            },
+            formatLoadingMessage : function() {
+                return "请稍等，正在加载中...";
+            },
+            cache : false,
+            striped: true, //是否显示行间隔色
+            dataField: "rows",//controller返回json数据对应key
+            pageNumber: 1, //初始化加载第一页，默认第一页
+            pagination:true,//是否分页
+            pageSize : 2,
+            pageList : [ 2, 10, 50 ],
+            sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+            queryParamsType:'', // 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber
+
+            // 直接把pageSize,pageNumber，调用queryParamsByBegin函数
+            columns : [ {
+                align : "center",
+                halign : "center",
+                valign : "middle",
+                field : '',
+                title : '序号',
+                formatter : function(value, row, index) {
+                    return index + 1;
+                }
+            }, {
+                align : "center",
+                halign : "center",
+                valign : "middle",
+                field : 'name',
+                title : '员工名称'
+            }, {
+                align : "center",
+                halign : "center",
+                valign : "middle",
+                field : 'status',
+                title : '员工状态',
+                formatter:function(value, row, index){
+                    if("1"==value){
+                        return '正常';
+                    }
+                    return '可解聘';
+                }
+            },{
+                align : "center",
+                halign : "center",
+                valign : "middle",
+                field : 'wage',
+                title : '工资'
+            } ],
+
+        });
+        // 隐藏主键显示
+        $('#mainTable').bootstrapTable('hideColumn', 'innerId');
     }
 </script>
 
