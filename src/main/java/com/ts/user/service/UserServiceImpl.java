@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService
         ResultInfo rs = new ResultInfo();
         try {
             rs.setRows(dao.queryUser(sWhere, sOrder, pageIndex, paheSize));
+            rs.setTotal(3);
         }
         catch (Exception e){
             rs.setsErrorMsg(e.getLocalizedMessage());
