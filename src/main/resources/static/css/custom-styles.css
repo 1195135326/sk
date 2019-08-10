@@ -30,14 +30,6 @@ body {
     padding: 15px 30px;
     max-height: 880px;
 }
-#mainFrame{
-    width:100%;
-    height:100%;
-    margin:10px 0px 0px 0px;
-    padding: 15px 0px;
-    max-height: 880px;
-    min-height: 860px;
-}
 .header .container-fluid{
 padding:0;
 }
@@ -668,4 +660,9 @@ top: 93px;
 }
 }
 
-
+#mainFrame{
+    width:100%;
+    height:100%;
+    margin:10px 0px 0px 0px;
+    min-height: 840px;
+}

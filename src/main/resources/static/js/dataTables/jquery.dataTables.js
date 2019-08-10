@@ -4329,7 +4329,7 @@
 			if ( col.bSortable ) {
 				if ( aSort.length > 0 && aSort[0].col == i ) {
 					jqTh.attr('aria-sort', aSort[0].dir=="asc" ? "ascending" : "descending" );
-					nextSort = asSorting[ aSort[0].index+1 ] || asSorting[0];
+					nextSort = asSorting[ aSort[0].console+1 ] || asSorting[0];
 				}
 				else {
 					nextSort = asSorting[0];
@@ -5401,10 +5401,10 @@
 			var nodeName = node.nodeName.toUpperCase();
 		
 			if ( nodeName == 'TR' ) {
-				return api.row( node ).index();
+				return api.row( node ).console();
 			}
 			else if ( nodeName == 'TD' || nodeName == 'TH' ) {
-				var cell = api.cell( node ).index();
+				var cell = api.cell( node ).console();
 		
 				return [
 					cell.row,
@@ -7345,7 +7345,7 @@
 						return $.inArray( el, displayFiltered ) === -1 ? el : null;
 					} );
 		}
-		else if ( order == 'index' || order == 'original' ) {
+		else if ( order == 'console.html' || order == 'original' ) {
 			for ( i=0, ien=settings.aoData.length ; i<ien ; i++ ) {
 				if ( search == 'none' ) {
 					a.push( i );

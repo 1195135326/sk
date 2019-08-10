@@ -9,6 +9,9 @@ public interface UserService
 
     public ResultInfo searchAllUser(String sWhere, String sOrder, int pageIndex, int paheSize);
 
-    public void addEditDel(UserInfo userInfo);
+    public ResultInfo addUser(UserInfo userInfo);
 
+    public ResultInfo editUser(UserInfo userInfo);
+
+    public ResultInfo delUser(UserInfo userInfo);
 }

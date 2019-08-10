@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserDao {
-    public void add(UserInfo userInfo) throws Exception;
+    public int getMaxID() throws Exception;
+
+    public void add(UserInfo userInfo,int iMaxID) throws Exception;
 
     public void edit(String sUserCode) throws Exception;
 

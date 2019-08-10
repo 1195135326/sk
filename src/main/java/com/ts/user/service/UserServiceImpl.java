@@ -6,8 +6,9 @@ import com.ts.user.UI.UserInfo;
 import com.ts.user.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class UserServiceImpl implements UserService
 
 {
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService
         ResultInfo rs = new ResultInfo();
         try {
             rs.setRows(dao.queryUser(sWhere, sOrder, pageIndex, paheSize));
-            rs.setTotal(3);
+            rs.setTotal(5);
         }
         catch (Exception e){
             rs.setsErrorMsg(e.getLocalizedMessage());
@@ -33,7 +34,35 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public void addEditDel(UserInfo userInfo) {
-
+    public ResultInfo addUser(UserInfo userInfo) {
+        ResultInfo rs = new ResultInfo();
+        try {
+            int iMaxID = dao.getMaxID();
+            dao.add(userInfo, iMaxID);
+        }catch (Exception e){
+            rs.setsErrorMsg(e.getLocalizedMessage());
+        }
+        return rs;
     }
+
+    @Override
+    public ResultInfo editUser(UserInfo userInfo) {
+        ResultInfo rs = new ResultInfo();
+        try {
+        }catch (Exception e){
+            rs.setsErrorMsg(e.getLocalizedMessage());
+        }
+        return rs;
+    }
+
+    @Override
+    public ResultInfo delUser(UserInfo userInfo) {
+        ResultInfo rs = new ResultInfo();
+        try {
+        }catch (Exception e){
+            rs.setsErrorMsg(e.getLocalizedMessage());
+        }
+        return rs;
+    }
+
 }
