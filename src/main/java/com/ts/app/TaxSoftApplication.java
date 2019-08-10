@@ -3,6 +3,7 @@ package com.ts.app;
 import com.ts.entity.User;
 import com.ts.jdbc.SysDB;
 import com.ts.system.newsManager.UI.Exceptions;
+import com.ts.user.UI.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -48,24 +49,23 @@ public class TaxSoftApplication {
 
     @ResponseBody
     @RequestMapping(value = "/test")
-    public Exceptions test()
+    public UserInfo test()
     {
-        Exceptions es = new Exceptions();
+        UserInfo user = new UserInfo();
         try {
-            User user = new User();
+
             user.setName("沈科test");
-          es.setObj(user);
         }
         catch (Exception e)
         {
-            es.setErrotMes(e.getLocalizedMessage());
+
         }
-        return es;
+        return user;
     }
 
     @RequestMapping(value = "/console")
     public String onTest()
     {
-        return "/Admin/AdminManage";
+        return "/index";
     }
 }

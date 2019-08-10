@@ -7,16 +7,15 @@
     <title>后台管理</title>
     <!-- Bootstrap -->
     <link href="/TaxSoft/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/TaxSoft/js/jquery-1.11.3.min.js"></script>
-    <script src="/TaxSoft/js/bootstrap.min.js"></script>
-    <script src="/TaxSoft/js/bootstrap-table.js"></script>
+    <script src="/TaxSoft/js/old/jquery-1.11.3.min.js"></script>
+    <script src="/TaxSoft/js/old/bootstrap.min.js"></script>
+    <script src="/TaxSoft/js/old/bootstrap-table.js"></script>
     <link href="/TaxSoft/css/addminMange.css" rel="stylesheet">
-
 
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin: 10px 5px">
         <!-- 按钮触发模态框 -->
         <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">新增</button>
         <!-- 模态框（Modal） -->
@@ -121,8 +120,23 @@
 
 <script>
     $(document).ready(function(){
+        $.ajax({
+            url: "/spring-mvc-json/rest/cont/person",
+            type: 'POST',
+            dataType: 'json',
+            data: "{\"name\":\"hmkcode\",\"id\":2}",
+            contentType: 'application/json',
+            mimeType: 'application/json',
+            success: function(data) {
+                alert(data.id + " " + data.name);
+            },
+            error:function(data,status,er) {
+                alert("error: "+data+" status: "+status+" er:"+er);
+            }
+        });
         initTable();
     });
+
 
     function initTable(){
         $('#mainTable').bootstrapTable('destroy');

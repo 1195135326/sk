@@ -8,31 +8,16 @@
         $(document).ready(function(){
             $("button").click(function(){
                 alert(1);
-//                $.get("/TaxSoft/test",function(data,status){
-//                    alert("数据：" + data.name + "\n状态1：" + status);
-//                });
-                $.ajax({
-                    url: "/TaxSoft/post/queryPost",
-                    type: 'POST',
-                    dataType: 'json',
-                    data: "{\"name\":\"dddd\"}",
-                    contentType: 'application/json',
-                    mimeType: 'application/json',
-                    success: function(data) {
-                        alert(data.name);
-                    },
-                    error:function(data,status,er) {
-                        alert("error: "+data+" status: "+status+" er:"+er);
-                    }
+                $.get("/TaxSoft/test",function(data,status){
+                    alert("数据：" + data.name + "\n状态1：" + status);
                 });
-//                $.post("/TaxSoft/post/queryPost","{\"name\":\"sk\"}");
             });
         });
     </script>
 </head>
 <body>
 
-    <p>Helloddd!${name}</p>
+    <p>Hello!${name}1</p>
     <button>测试 </button>
     <img class="img-responsive" src="/TaxSoft/logo.png" alt="税软logo">
 </body>

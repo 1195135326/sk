@@ -1,12 +1,12 @@
-#company-logo{
-    background-color: darkblue;
-    height: 60px;
-    padding-top:10px;
-}
-#header-row{
-    height: 60px;
-    min-height: 50px;
-    max-height: 70px;
+/*#company-logo{*/
+/*    background-color: darkblue;*/
+/*    height: 60px;*/
+/*    padding-top:10px;*/
+/*}*/
+.header-row{
+    height: 30%;
+    min-height: 60px;
+    max-height: 800px;
 }
 #shouzhan{
     padding-top: 15px;

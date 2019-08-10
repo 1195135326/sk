@@ -17,9 +17,7 @@ public class UserController
     @ResponseBody
     @RequestMapping("/queryUser")
     public ResultInfo queryUser(){
-        ResultInfo rs = new ResultInfo();
-        rs =  userService.searchAllUser("","",1,10);
-        return rs;
+        return  userService.searchAllUser("","",1,10);
     }
 
 
