@@ -2101,7 +2101,7 @@
         this.$el.trigger($.Event(name), args);
 
         this.options.onAll(name, args);
-        this.$el.trigger($.Event('all.bs.table'), [name, args]);
+        this.$el.trigger($.Event('static.js.old.all.bs.table'), [name, args]);
     };
 
     BootstrapTable.prototype.resetHeader = function () {
