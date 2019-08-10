@@ -1,5 +1,4 @@
----删除表
-
+---删除表和索引，先索引后表
 alter table s_userprod
    drop constraint pk_s_userprod;
 

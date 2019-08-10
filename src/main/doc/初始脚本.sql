@@ -2,6 +2,7 @@
 create user taxsoft  password '123456' ;
 grant all privileges on database postgres to taxsoft;
 ---创建表空间(位置需要提前创建)
+
 create tablespace ts_bussdata
    owner postgres
    location 'd:/taxsoft/buss/data';
