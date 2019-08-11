@@ -1,6 +1,4 @@
 package com.ts.system.newsManager.dao;
-
-
 import com.ts.comm.SysDate;
 import com.ts.comm.SysString;
 import com.ts.common.Utils;
@@ -297,6 +295,7 @@ public class NewsDaoImpl implements NewsDao {
             sb.append(" SELECT fpicpath FROM s_news where fid ="+iID);
             sPath = SysDB.getStringValue(jdbcTemplate,sb.toString());
             //修改
+            sb.setLength(0);
             sb.append("DELETE  FROM s_news s  ");
             sb.append("     WHERE s.fid=:fid");
             mp.put("fid",iID);
@@ -362,10 +361,17 @@ public class NewsDaoImpl implements NewsDao {
             mpInfo = SysDB.getMapValue(jdbcTemplate,sb.toString(),mp);
             resultInfo.setMpInfo(mpInfo);
             //查询文件
-            sPath = SysString.getMapStr(mpInfo,"fpicpath");
-            File file = new File(sPath);
-            InputStream in = new FileInputStream(file);
-            resultInfo.setObj(in);
+            if(mpInfo!=null)
+            {
+                //查询文件
+                sPath = SysString.getMapStr(mpInfo,"fpicpath");
+                String sPicName = SysString.getMapStr(mpInfo,"fpicname");
+                byte []  b = SysFile.readFile(sPath);
+                mp.clear();
+                mp.put("name",sPicName);
+                mp.put("bytedata",b);
+                resultInfo.setObj(mp);
+            }
 
         }catch (Exception e) {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());

@@ -1,30 +1,32 @@
-package com.ts.system.newsManager.control;
+package com.ts.system.CaseManager.control;
 
 
 import com.ts.comm.SysJson;
 import com.ts.comm.SysNumber;
 import com.ts.comm.SysString;
 import com.ts.entity.ResultInfo;
+import com.ts.system.CaseManager.UI.CaseInfo;
+import com.ts.system.CaseManager.service.CaseService;
 import com.ts.system.newsManager.UI.NewsInfo;
 import com.ts.system.newsManager.service.NewsService;
-import com.ts.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.Map;
 
 @Controller
-@RequestMapping("/news")
-public class NewsController {
+@RequestMapping("/case")
+public class CaseController {
 
     @Autowired
-    private NewsService newsService;
+    private CaseService caseService;
 
     /**
      * 查询
@@ -37,7 +39,7 @@ public class NewsController {
     {
         ResultInfo resultInfo = new ResultInfo();
         try{
-            resultInfo = newsService.queryData();
+            resultInfo = caseService.queryData();
         }catch (Exception e)
         {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
@@ -59,17 +61,14 @@ public class NewsController {
                             @RequestParam(value = "file",required = false) MultipartFile file)
     {
         ResultInfo resultInfo = new ResultInfo();
-        NewsInfo newsInfo = null;
+        CaseInfo caseInfo = null;
         try{
             HashMap<String,Object> mp = SysJson.toHashMap(data);
-            newsInfo = new NewsInfo();
-            newsInfo.setCateCode(SysString.getMapStr(mp,"cateCode"));
-            newsInfo.setContent(SysString.getMapStr(mp,"content"));
-            newsInfo.setDesc(SysString.getMapStr(mp,"desc"));
-            newsInfo.setTitile(SysString.getMapStr(mp,"titile"));
-            newsInfo.setShow((Boolean)mp.get("show"));
-            newsInfo.setHot((Boolean)mp.get("hot"));
-            resultInfo = newsService.add(newsInfo,file);
+            caseInfo = new CaseInfo();
+            caseInfo.setCateCode(SysString.getMapStr(mp,"cateCode"));
+            caseInfo.setConten(SysString.getMapStr(mp,"content"));
+            caseInfo.setTitile(SysString.getMapStr(mp,"titile"));
+            resultInfo = caseService.add(caseInfo,file);
 
         }catch (Exception e)
         {
@@ -90,18 +89,15 @@ public class NewsController {
                             @RequestParam(value = "file",required = false) MultipartFile file)
     {
         ResultInfo resultInfo = new ResultInfo();
-        NewsInfo newsInfo = null;
+        CaseInfo caseInfo = null;
         try{
             HashMap<String,Object> mp = SysJson.toHashMap(data);
-            newsInfo = new NewsInfo();
-            newsInfo.setID(SysNumber.getMapInt(mp,"ID"));
-            newsInfo.setCateCode(SysString.getMapStr(mp,"cateCode"));
-            newsInfo.setContent(SysString.getMapStr(mp,"content"));
-            newsInfo.setDesc(SysString.getMapStr(mp,"desc"));
-            newsInfo.setTitile(SysString.getMapStr(mp,"titile"));
-            newsInfo.setShow((Boolean)mp.get("show"));
-            newsInfo.setHot((Boolean)mp.get("hot"));
-            resultInfo = newsService.edit(newsInfo,file);
+            caseInfo = new CaseInfo();
+            caseInfo.setID(SysNumber.getMapInt(mp,"ID"));
+            caseInfo.setCateCode(SysString.getMapStr(mp,"cateCode"));
+            caseInfo.setConten(SysString.getMapStr(mp,"content"));
+            caseInfo.setTitile(SysString.getMapStr(mp,"titile"));
+            resultInfo = caseService.edit(caseInfo,file);
         }catch (Exception e)
         {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
@@ -122,7 +118,7 @@ public class NewsController {
         ResultInfo resultInfo = new ResultInfo();
         NewsInfo newsInfo = null;
         try{
-            resultInfo = newsService.delete(ID);
+            resultInfo = caseService.delete(ID);
         }catch (Exception e)
         {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
@@ -146,10 +142,10 @@ public class NewsController {
         HashMap<String,Object> mp = null;
         String fileName ="";
         try{
-            resultInfo = newsService.get(ID);
-            if(resultInfo !=null && resultInfo.getMpInfo()!=null)
+            resultInfo = caseService.get(ID);
+            if(resultInfo!=null  && resultInfo.getMpInfo()!=null)
             {
-                fileName = SysString.toString(resultInfo.getMpInfo().get("fresourcename"));
+                fileName = SysString.toString(resultInfo.getMpInfo().get("fpicname"));
                 response.setContentType("application/force-download");
                 response.setHeader("Content-Disposition", "attachment;filename=" + new String((fileName).getBytes("UTF-8"), "iso-8859-1"));
                 outputStream = response.getOutputStream();

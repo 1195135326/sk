@@ -78,6 +78,8 @@ public class ProductController {
         }
         return resultInfo;
     }
+
+
     /**
      * 修改
      *
@@ -112,6 +114,8 @@ public class ProductController {
         return resultInfo;
     }
 
+
+
     /**
      * 修改
      *
@@ -145,17 +149,28 @@ public class ProductController {
     {
         ResultInfo resultInfo = new ResultInfo();
         ServletOutputStream outputStream = null;
+        HashMap<String,Object> mp = null;
+        String fileName ="";
         try{
             resultInfo = productService.get(ID);
-            String fileName = SysString.toString(resultInfo.getMpInfo().get("fresourcename"));
-            response.setContentType("application/force-download");
-            response.setHeader("Content-Disposition", "attachment;filename=" + new String((fileName).getBytes("UTF-8"), "iso-8859-1"));
-            outputStream = response.getOutputStream();
-            if (resultInfo.getObj()!=null) {
-                byte [] b = (byte[]) resultInfo.getObj();
-                outputStream.write(b);
-                outputStream.flush();
-                outputStream.close();
+            if(resultInfo!=null && resultInfo.getMpInfo()!=null)
+            {
+                fileName = SysString.toString(resultInfo.getMpInfo().get("fresourcename"));
+                response.setContentType("application/force-download");
+                response.setHeader("Content-Disposition", "attachment;filename=" + new String((fileName).getBytes("UTF-8"), "iso-8859-1"));
+                outputStream = response.getOutputStream();
+                if (resultInfo.getObj()!=null) {
+                    mp = ( HashMap<String,Object> )resultInfo.getObj();
+                    if(mp!=null)
+                    {
+                        byte [] b = (byte[]) mp.get("bytedata");
+                        outputStream.write(b);
+                        outputStream.flush();
+                        outputStream.close();
+                    }
+                }
+            }else{
+                resultInfo.setsErrorMsg("未获取到有效数据!");
             }
         }catch (Exception e)
         {
@@ -177,21 +192,30 @@ public class ProductController {
     {
         ResultInfo resultInfo = new ResultInfo();
         ServletOutputStream outputStream = null;
+        String fileName = "";
+        HashMap<String,Object> mp = null;
         try{
             resultInfo = productService.downResource(ID);
-            String fileName = SysString.toString(resultInfo.getMpInfo().get("fresourcename"));
-            response.setContentType("application/force-download");
-            response.setHeader("Content-Disposition", "attachment;filename=" + new String((fileName).getBytes("UTF-8"), "iso-8859-1"));
-            outputStream = response.getOutputStream();
-            if (resultInfo.getObj()!=null) {
-                byte [] b = (byte[]) resultInfo.getObj();
-                outputStream.write(b);
-                outputStream.flush();
-                outputStream.close();
-            } else {
-                resultInfo.setsErrorMsg("该产品在无下载资源!");
-                return resultInfo;
+            if(resultInfo.getMpInfo()!=null)
+            {
+                fileName = SysString.toString(resultInfo.getMpInfo().get("fresourcename"));
+                response.setContentType("application/force-download");
+                response.setHeader("Content-Disposition", "attachment;filename=" + new String((fileName).getBytes("UTF-8"), "iso-8859-1"));
+                outputStream = response.getOutputStream();
+                if (resultInfo.getObj()!=null) {
+                    mp = ( HashMap<String,Object> )resultInfo.getObj();
+                    if(mp!=null)
+                    {
+                        byte [] b = (byte[]) mp.get("bytedata");
+                        outputStream.write(b);
+                        outputStream.flush();
+                        outputStream.close();
+                    }
+                }
+            }else{
+                resultInfo.setsErrorMsg("未获取到有效数据!");
             }
+
         }catch (Exception e)
         {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
