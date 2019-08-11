@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="/TaxSoft/css/login.css" type="text/css" rel="stylesheet" />
+	<title>login</title>
+</head>
+<body>
+	<div class="user-body-bg"></div>
+	<div class="user-login-bg"></div>
+	<div class="user-bottom-bg"></div>
+	<div class="login-box">
+		<form action="/TaxSoft/user/login" method="get" id="formLogin">
+			<label class="form-inline">
+				<div class="form-inline-font">
+					用户名 :
+				</div>
+				<div class="form-inline-input">
+					<input type="text" name="loginAccount" maxlength="50"/>
+				</div>
+			</label>
+			<label class="form-inline">
+				<div class="form-inline-font">
+					密码 :
+				</div>
+				<div class="form-inline-input">
+					<input type="password" name="loginPwd" maxlength="50" />
+				</div>
+			</label>
+			<label class="form-inline">
+				<div class="form-inline-font">
+					验证 :
+				</div>
+				<div class="form-inline-input">
+					<div class="code-box" id="code-box">
+						<input type="text" name="code" class="code-input" />
+						<p></p>
+						<span id="sliver">>>></span>
+					</div>
+				</div>
+			</label>
+			<p>${(msg)!}</p>
+			<div class="login-btn">
+				<button type="submit">登录</button>
+			</div>
+		</form>
+	</div>
+</body>
+<!-- jQuery Js -->
+<script src="/TaxSoft/js/jquery-1.10.2.js"></script>
+<!--<script src="/TaxSoft/js/jquery.form.min.js"></script>-->
+<script src="/TaxSoft/js/login.js"></script>
+<script>
+
+
+	// $(function(){
+	// 	$("#formLogin").ajaxForm(function(data){
+	// 		alert(data);
+	// 		if(data=="1"){
+	// 			alert("提交成功！");
+	// 		}
+	// 	});
+	// });
+
+	window.addEventListener('load',function(){
+		var code = "";
+		$.ajax({
+			url:"/TaxSoft/user/randomCode",
+			type:"get",
+			data:"",
+			contentType:"application/json",
+			dataType:"json",
+			success:function (data,textStatus) {
+				code = data;
+				codeFn = new moveCode(code);
+			}
+		});
+		//code是后台传入的验证字符串
+
+		//获取当前的code值
+		//console.log(codeFn.getCode());
+
+		//改变code值
+		//code = '46asd546as5';
+		//codeFn.setCode(code);
+		
+		//重置为初始状态
+		//codeFn.resetCode();
+	});
+</script>
+</html>
