@@ -10,13 +10,10 @@ import com.ts.jdbc.SysDB;
 import com.ts.system.newsManager.UI.NewsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +66,12 @@ public class NewsDaoImpl implements NewsDao {
                 {
                     resultInfo.setsErrorMsg("配置文件未找到有效资源目录配置！");
                 }else {
-                    sSysPath = sSysPath+"/"+iMaxID+"/";
+                    sSysPath = sSysPath+"/news/";
+                    if(!new File(sSysPath).exists())
+                    {
+                        SysFile.createDir(sSysPath);
+                    }
+                    sSysPath = sSysPath+iMaxID+"/";
                     if(new File(sSysPath).exists())
                     {
                         SysFile.deleteDir(sSysPath);
@@ -138,45 +140,50 @@ public class NewsDaoImpl implements NewsDao {
             mp.put("fishot",newsInfo.isHot());
             mp.put("fnoshow",newsInfo.isShow());
             SysDB.update(jdbcTemplate,sb.toString(),mp);
-            //有图片
-            if(b!=null)
+        //有图片
+        if(b!=null)
+        {
+            sSysPath = Utils.getSysPath();
+            if(SysString.isEmpty(sSysPath))
             {
-                sSysPath = Utils.getSysPath();
-                if(SysString.isEmpty(sSysPath))
+                resultInfo.setsErrorMsg("配置文件未找到有效资源目录配置！");
+            }else {
+                sSysPath = sSysPath+"/news/";
+                if(!new File(sSysPath).exists())
                 {
-                    resultInfo.setsErrorMsg("配置文件未找到有效资源目录配置！");
-                }else {
-                    sSysPath = sSysPath+"/"+iID+"/";
-                    if(new File(sSysPath).exists())
-                    {
-                        SysFile.deleteDir(sSysPath);
-                    }
                     SysFile.createDir(sSysPath);
-                    sPicName = newsInfo.getPicName();
-                    sPath = sSysPath  + sPicName;
-                    File file = new File(sPath);
-                    OutputStream out = new FileOutputStream(file);
-                    out.write(b);
-                    out.flush();
-                    out.close();
-                    sb.setLength(0);
-                    mp.clear();
-                    sb.append(" UPDATE s_news SET fpicname = :fpicname ,fpicpath=:fpicpath ");
-                    sb.append("              WHERE fid = :fid");
-                    mp.put("fid", iID);
-                    mp.put("fpicname", sPicName);
-                    mp.put("fpicpath",sPath);
-                    SysDB.update(jdbcTemplate, sb.toString(), mp);
                 }
-            }else{
-                if(!SysString.isEmpty(sOldPath))
+                sSysPath = sSysPath+"/"+iID+"/";
+                if(new File(sSysPath).exists())
                 {
-                    if(new File(sOldPath).exists())
-                    {
-                        SysFile.deleteFile(sOldPath);
-                    }
+                    SysFile.deleteDir(sSysPath);
+                }
+                SysFile.createDir(sSysPath);
+                sPicName = newsInfo.getPicName();
+                sPath = sSysPath  + sPicName;
+                File file = new File(sPath);
+                OutputStream out = new FileOutputStream(file);
+                out.write(b);
+                out.flush();
+                out.close();
+                sb.setLength(0);
+                mp.clear();
+                sb.append(" UPDATE s_news SET fpicname = :fpicname ,fpicpath=:fpicpath ");
+                sb.append("              WHERE fid = :fid");
+                mp.put("fid", iID);
+                mp.put("fpicname", sPicName);
+                mp.put("fpicpath",sPath);
+                SysDB.update(jdbcTemplate, sb.toString(), mp);
+            }
+        }else{
+            if(!SysString.isEmpty(sOldPath))
+            {
+                if(new File(sOldPath).exists())
+                {
+                    SysFile.deleteFile(sOldPath);
                 }
             }
+        }
         }catch (Exception e) {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
         }
@@ -282,16 +289,24 @@ public class NewsDaoImpl implements NewsDao {
         ResultInfo resultInfo =  new ResultInfo();
         HashMap<String,Object> mp = new HashMap<>();
         StringBuffer sb = null;
-        String sSysPath = "";
+        String sPath = "";
         try{
             sb =  new StringBuffer();
+            //获取路径，如果有图片，清除图片
+            sb.setLength(0);
+            sb.append(" SELECT fpicpath FROM s_news where fid ="+iID);
+            sPath = SysDB.getStringValue(jdbcTemplate,sb.toString());
             //修改
             sb.append("DELETE  FROM s_news s  ");
             sb.append("     WHERE s.fid=:fid");
             mp.put("fid",iID);
             SysDB.update(jdbcTemplate,sb.toString(),mp);
+            if(!SysString.isEmpty(sPath))
+            {
+                SysFile.deleteFile(sPath);
+            }
         }catch (Exception e) {
-            SysFile.deleteDir(sSysPath);
+
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
         }
         return resultInfo;
@@ -336,7 +351,7 @@ public class NewsDaoImpl implements NewsDao {
         HashMap<String,Object> mp = new HashMap<>();
         Map<String,Object> mpInfo = new HashMap<>();
         StringBuffer sb = null;
-        String sSysPath = "";
+        String sPath = "";
         try{
             sb =  new StringBuffer();
             //查询数据
@@ -346,6 +361,12 @@ public class NewsDaoImpl implements NewsDao {
             mp.put("fid",iID);
             mpInfo = SysDB.getMapValue(jdbcTemplate,sb.toString(),mp);
             resultInfo.setMpInfo(mpInfo);
+            //查询文件
+            sPath = SysString.getMapStr(mpInfo,"fpicpath");
+            File file = new File(sPath);
+            InputStream in = new FileInputStream(file);
+            resultInfo.setObj(in);
+
         }catch (Exception e) {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
         }
