@@ -64,4 +64,10 @@ public class TaxSoftApplication {
     {
         return "/control";
     }
+
+    @RequestMapping(value = "/index")
+    public String onIndex()
+    {
+        return "/index";
+    }
 }
