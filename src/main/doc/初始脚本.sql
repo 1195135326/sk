@@ -47,7 +47,7 @@ create table s_news (
    fdatetime            timestamp            null,
    fishot               bool                 null,
    fnoshow              bool                 null,
-   ftime                timestamp            null
+   ftime                timestamp            null,
 )
 tablespace ts_systemdata;
 
