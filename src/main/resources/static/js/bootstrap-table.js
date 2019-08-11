@@ -1843,7 +1843,7 @@
         this.$body.find('> tr[data-index] > td').off('click dblclick').on('click dblclick', function (e) {
             var $td = $(this),
                 $tr = $td.parent(),
-                item = that.data[$tr.data('console.html')],
+                item = that.data[$tr.data('index')],
                 index = $td[0].cellIndex,
                 fields = that.getVisibleFields(),
                 field = fields[that.options.detailView && !that.options.cardView ? index - 1 : index],
