@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap Styles-->
+    <link href="/TaxSoft/css/bootstrap.css" rel="stylesheet" />
+    <link href="/TaxSoft/css/bootstrap-table.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="/TaxSoft/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="/TaxSoft/css/custom-styles.css" rel="stylesheet" />
+    <link href="/TaxSoft/css/userManage.css" rel="stylesheet" />
+
+</head>
+
+<body class="userManage">
+    <div class="panel panel-default">
+        <div class="panel-body" id="toolbar">
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                新增
+            </button>
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                修改
+            </button>
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                删除
+            </button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Modal title Here</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-div">
+                                <label class="lb-input-1">客户代码:</label><input type="text" class="input-user" id="userCode" />
+                                <label class="lb-input-2">客户名称:</label><input type="text" class="input-user" id="userName" />
+                            </div>
+                            <div class="input-div">
+                                <label class="lb-input-1">登录账号:</label><input type="text" class="input-user" id="loginAccount" />
+                                <label class="lb-input-2">登录密码:</label><input type="text" class="input-user" id="loginPassword"/>
+                            </div>
+                            <div class="input-div">
+                                <label class="lb-input-1">机构名称:</label><input type="text" class="input-user" id="deptName"/>
+                                <label class="lb-input-2">手机号码:</label><input type="text" class="input-user" id="phoneNum"/>
+                            </div>
+                            <div class="input-div">
+                                <label class="lb-input-1">固定电话:</label><input type="text" class="input-user" id="telNum"/>
+                                <label class="lb-input-2">电子邮箱:</label><input type="text" class="input-user" id="email"/>
+                            </div>
+                            <div class="input-div">
+                                <label class="lb-input-1">产品授权:</label><input type="checkbox" name="root" value="A">A产品
+                                <input type="checkbox" name="root" value="B">B产品
+                                <input type="checkbox" name="root" value="C">C产品
+                                <input type="checkbox" name="root" value="D">D产品
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" id="btnSubmit">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="userTable">
+        <table id="userTable"></table>
+    </div>
+
+    <!-- jQuery Js -->
+    <script src="/TaxSoft/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="/TaxSoft/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="/TaxSoft/js/jquery.metisMenu.js"></script>
+    <!-- Bootstrap-table Js -->
+    <script src="/TaxSoft/js/bootstrap-table.js"></script>
+    <script src="/TaxSoft/js/bootstrap-table-zh-CN.js"></script>
+    <!-- Custom Js -->
+    <script src="/TaxSoft/js/custom-scripts.js"></script>
+    <script src="/TaxSoft/js/admin/userManage.js"></script>
+</body>
+</html>

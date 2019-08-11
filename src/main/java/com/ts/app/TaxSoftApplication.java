@@ -15,10 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -48,24 +45,23 @@ public class TaxSoftApplication {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/test")
-    public UserInfo test()
+    @PostMapping(value = "/test")
+    public UserInfo test(@RequestBody UserInfo userInfo)
     {
-        UserInfo user = new UserInfo();
         try {
 
-            user.setName("沈科test");
+            userInfo.setUserName("沈科test");
         }
         catch (Exception e)
         {
 
         }
-        return user;
+        return userInfo;
     }
 
     @RequestMapping(value = "/console")
     public String onTest()
     {
-        return "/index";
+        return "/console";
     }
 }
