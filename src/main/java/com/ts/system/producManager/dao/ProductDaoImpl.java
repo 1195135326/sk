@@ -273,10 +273,16 @@ public class ProductDaoImpl implements ProductDao {
             mpInfo = SysDB.getMapValue(jdbcTemplate,sb.toString(),mp);
             resultInfo.setMpInfo(mpInfo);
             //查询文件
-            sPath = SysString.getMapStr(mpInfo,"fresourcepath");
-            String sResourceName = SysString.getMapStr(mpInfo,"fresourcename");
-            byte []  b = SysFile.readFile(sPath);
-            resultInfo.setObj(b);
+
+            if(mpInfo!=null) {
+                sPath = SysString.getMapStr(mpInfo, "fresourcepath");
+                String sResourceName = SysString.getMapStr(mpInfo, "fresourcename");
+                byte[] b = SysFile.readFile(sPath);
+                mp.clear();
+                mp.put("name",sResourceName);
+                mp.put("bytedata",b);
+                resultInfo.setObj(mp);
+            }
 
         }catch (Exception e) {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
@@ -307,10 +313,15 @@ public class ProductDaoImpl implements ProductDao {
             mpInfo = SysDB.getMapValue(jdbcTemplate,sb.toString(),mp);
             resultInfo.setMpInfo(mpInfo);
             //查询文件
-            sPath = SysString.getMapStr(mpInfo,"fresourcepath");
-            String sResourceName = SysString.getMapStr(mpInfo,"fresourcename");
-            byte []  b = SysFile.readFile(sPath);
-            resultInfo.setObj(b);
+            if(mpInfo!=null) {
+                sPath = SysString.getMapStr(mpInfo, "fresourcepath");
+                String sResourceName = SysString.getMapStr(mpInfo, "fresourcename");
+                byte[] b = SysFile.readFile(sPath);
+                mp.clear();
+                mp.put("name",sResourceName);
+                mp.put("bytedata",b);
+                resultInfo.setObj(mp);
+            }
 
         }catch (Exception e) {
             resultInfo.setsErrorMsg(e.getLocalizedMessage());
