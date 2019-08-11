@@ -68,6 +68,6 @@ public class TaxSoftApplication {
     @RequestMapping(value = "/index")
     public String onIndex()
     {
-        return "/login";
+        return "/index";
     }
 }
