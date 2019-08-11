@@ -62,6 +62,6 @@ public class TaxSoftApplication {
     @RequestMapping(value = "/console")
     public String onTest()
     {
-        return "/console";
+        return "/control";
     }
 }

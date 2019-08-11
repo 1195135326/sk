@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService
         ResultInfo rs = new ResultInfo();
         try {
             rs.setRows(dao.queryUser(sWhere, sOrder, pageIndex, paheSize));
-            rs.setTotal(5);
+            rs.setTotal(dao.getCount());
         }
         catch (Exception e){
             rs.setsErrorMsg(e.getLocalizedMessage());
@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService
         ResultInfo rs = new ResultInfo();
         try {
             int iMaxID = dao.getMaxID();
+            if(dao.isExists(userInfo))
+            {
+                rs.setsErrorMsg("该客户已存在！");
+                return rs;
+            }
             dao.add(userInfo, iMaxID);
         }catch (Exception e){
             rs.setsErrorMsg(e.getLocalizedMessage());
@@ -49,6 +54,7 @@ public class UserServiceImpl implements UserService
     public ResultInfo editUser(UserInfo userInfo) {
         ResultInfo rs = new ResultInfo();
         try {
+            dao.edit(userInfo);
         }catch (Exception e){
             rs.setsErrorMsg(e.getLocalizedMessage());
         }
@@ -59,6 +65,7 @@ public class UserServiceImpl implements UserService
     public ResultInfo delUser(UserInfo userInfo) {
         ResultInfo rs = new ResultInfo();
         try {
+            dao.delete(userInfo.getUserCode());
         }catch (Exception e){
             rs.setsErrorMsg(e.getLocalizedMessage());
         }

@@ -9,15 +9,6 @@ public class UserInfo {
     private String phoneNum = "";
     private String telNum = "";
     private String email = "";
-    private String address = "";
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getUserCode() {
         return userCode;

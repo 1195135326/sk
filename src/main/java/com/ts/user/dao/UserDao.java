@@ -12,11 +12,15 @@ public interface UserDao {
 
     public void add(UserInfo userInfo,int iMaxID) throws Exception;
 
-    public void edit(String sUserCode) throws Exception;
+    public void edit(UserInfo userInfo) throws Exception;
 
     public void delete(String sUserCode) throws Exception;
 
     public UserInfo getUser(String sUserCode) throws Exception;
 
     public List<Map<String,Object>> queryUser(String sWhere, String sOrder, int pageIndex, int paheSize) throws Exception;
+
+    public boolean isExists(UserInfo userInfo) throws Exception;
+
+    public int getCount() throws Exception;
 }

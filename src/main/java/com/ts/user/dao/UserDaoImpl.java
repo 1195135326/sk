@@ -32,11 +32,10 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     public void add(UserInfo userInfo, int iMaxID) throws Exception {
         String sql = "";
-        HashMap<String, Object> mp = new HashMap<>();
         try {
-            sql = "insert into taxsoft.s_user (fid,fcode,fname,floginaccount,fpwd,faddress,fdeptname,fphonenum,ftelnum,femail,ftime) " +
+            sql = "insert into taxsoft.s_user (fid,fcode,fname,floginaccount,fpwd,fdeptname,fphonenum,ftelnum,femail,ftime) " +
                     "values (" + iMaxID + ",'" + userInfo.getUserCode() + "','" + userInfo.getUserName() + "','" + userInfo.getLoginAccount() +
-                    "','" + userInfo.getLoginPassword() + "','" + userInfo.getAddress() + "','" + userInfo.getDeptName() + "','" + userInfo.getPhoneNum() +
+                    "','" + userInfo.getLoginPassword() + "','" + userInfo.getDeptName() + "','" + userInfo.getPhoneNum() +
                     "','" + userInfo.getTelNum() + "','" + userInfo.getEmail() + "',to_timestamp(" + new Date().getTime() + "))";
             SysDB.execute(con, sql);
         }catch (Exception e){
@@ -46,14 +45,23 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional
-    public void edit(String sUserCode) throws Exception {
-
+    public void edit(UserInfo userInfo) throws Exception {
+        String sql = "";
+        try {
+            sql = "update taxsoft.s_user set fname='" + userInfo.getUserName() + "',floginaccount='"+userInfo.getLoginAccount()+
+                    "',fpwd='"+userInfo.getLoginPassword()+"',fdeptname='"+userInfo.getDeptName()+"',fphonenum='"+userInfo.getPhoneNum()+
+                    "',ftelnum='"+userInfo.getTelNum()+"',femail='"+ userInfo.getEmail()+"',ftime=to_timestamp("+new Date().getTime()+")" +
+                    " where fcode='"+userInfo.getUserCode()+"'";
+            SysDB.execute(con, sql);
+        }catch (Exception e){
+            throw e;
+        }
     }
 
     @Override
     @Transactional
     public void delete(String sUserCode) throws Exception {
-
+        SysDB.execute(con,"delete from taxsoft.s_user where fcode='"+sUserCode+"'");
     }
 
     @Override
@@ -62,7 +70,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<Map<String,Object>> queryUser(String sWhere, String sOrder, int pageIndex, int paheSize) throws Exception {
-        return con.queryForList("select * from taxsoft.s_user",new HashMap<>());
+    public List<Map<String,Object>> queryUser(String sWhere, String sOrder, int pageIndex, int pageSize) throws Exception {
+        int ibeg = pageSize * (pageIndex-1);
+//        return con.queryForList("select a.* from taxsoft.s_user a  order by 1 limit "+pageSize+" offset "+ibeg+" ",new HashMap<>());
+        return con.queryForList("select a.* from taxsoft.s_user a  order by 1 ",new HashMap<>());
+    }
+
+    @Override
+    public boolean isExists(UserInfo userInfo) throws Exception {
+        return SysDB.getIntValue(con, "select count(1) from taxsoft.s_user where fcode='"+userInfo.getUserCode()+"'")==0?false:true;
+    }
+
+    @Override
+    public int getCount() throws Exception {
+        return SysDB.getIntValue(con, "select count(1) from taxsoft.s_user");
     }
 }
