@@ -113,3 +113,18 @@ function moveCode(code){
 
 	return fn;
 }
+
+function formCheck(){
+    var box = document.querySelector("#code-box"),
+        progress = box.querySelector("p");
+    if('验证成功' != progress.innerText)
+    {
+        alert("验证失败");
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+

@@ -35,16 +35,18 @@ html,body{
 .login-box{
 	position: absolute;
 	z-index: 9;
-    width: 435px;
+    width:25%;
     top: 50%;
     left: 50%;
-    margin-top: -10%;
-    margin-left: -18%;
+    margin-top: -8%;
+    margin-left: -14%;
 	padding-top: 45px;
     border: 1px solid #666;
     background: #ffffff;
 	border-radius: 2px;
 	color: #000000;
+	min-width: 480px;
+	min-height: 266px;
 }
 .login-box form{
 	position: relative;
@@ -114,10 +116,9 @@ html,body{
 	display: none;
 }
 .login-btn{
-	padding-right: 25px;
 	padding-top: 15px;
 	padding-bottom: 10px;
-	text-align: right;
+	text-align: center;
 	font-size: 0;
 }
 .user-btn-link{
@@ -143,6 +144,7 @@ html,body{
 	font-size: 14px;
 	color:#fff;
 	cursor: pointer;
+	width: 80px;
 }
 .login-btn button:hover{
 	box-shadow: 0 0 3px #00a1d2;
@@ -150,4 +152,14 @@ html,body{
 }
 #sliver{
 	background-color: #00a1d2;
+}
+#title-login{
+	font-size: 18px;
+	margin-left: 38%;
+}
+#tips{
+	color: red;
+	text-align: center;
+	height: 20px;
+	margin-top: 10px;
 }
