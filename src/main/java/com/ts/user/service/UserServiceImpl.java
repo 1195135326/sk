@@ -72,4 +72,15 @@ public class UserServiceImpl implements UserService
         return rs;
     }
 
+    @Override
+    public ResultInfo getPassWord(String sUserCode) {
+        ResultInfo rs = new ResultInfo();
+        try {
+            rs.setObj(dao.getUser(sUserCode));
+        }catch (Exception e){
+            rs.setsErrorMsg(e.getLocalizedMessage());
+        }
+        return rs;
+    }
+
 }

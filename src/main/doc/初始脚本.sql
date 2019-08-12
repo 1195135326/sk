@@ -47,7 +47,7 @@ create table s_news (
    fdatetime            timestamp            null,
    fishot               bool                 null,
    fnoshow              bool                 null,
-   ftime                timestamp            null,
+   ftime                timestamp            null
 )
 tablespace ts_systemdata;
 
@@ -190,3 +190,18 @@ comment on column s_user.femail is
 
 alter table s_user
    add constraint pk_s_user primary key (fid);
+
+create table s_case (
+   fid                  numeric(10)          not null,
+   fcatecode            varchar(50)          null,
+   ftitle               varchar(255)         null default '',
+	 fpicpath							varchar(255)         null default '',
+	 fpicname							varchar(255)         null default '',
+   fpublishdate         char(10)             null,
+   fcontent             text                 null,
+   ftime                timestamp            null
+)
+tablespace ts_systemdata;
+
+alter table s_case
+   add constraint pk_s_case primary key (fid);

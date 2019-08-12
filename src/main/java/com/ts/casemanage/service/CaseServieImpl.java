@@ -1,8 +1,8 @@
-package com.ts.system.CaseManager.service;
+package com.ts.casemanage.service;
 
 import com.ts.entity.ResultInfo;
-import com.ts.system.CaseManager.UI.CaseInfo;
-import com.ts.system.CaseManager.dao.CaseDao;
+import com.ts.casemanage.UI.CaseInfo;
+import com.ts.casemanage.dao.CaseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

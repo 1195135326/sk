@@ -1,5 +1,6 @@
 package com.ts.user.dao;
 
+import com.ts.comm.SysString;
 import com.ts.entity.ResultInfo;
 import com.ts.jdbc.SysDB;
 import com.ts.user.UI.UserInfo;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
 
 @Repository
@@ -66,7 +69,24 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public UserInfo getUser(String sUserCode) throws Exception {
-        return null;
+        String sql = "select * from taxsoft.s_user where fcode='"+sUserCode+"'";
+        UserInfo userInfo = new UserInfo();
+        Map<String,Object> mp;
+        try {
+            mp = SysDB.getMapValue(con,sql,new HashMap<>());
+            userInfo.setUserCode(SysString.getMapStr(mp,"fcode"));
+            userInfo.setUserName(SysString.getMapStr(mp,"fname"));
+            userInfo.setLoginAccount(SysString.getMapStr(mp,"floginaccount"));
+            userInfo.setLoginPassword(SysString.getMapStr(mp,"fpwd"));
+            userInfo.setDeptName(SysString.getMapStr(mp,"fdeptname"));
+            userInfo.setPhoneNum(SysString.getMapStr(mp,"fphonenum"));
+            userInfo.setTelNum(SysString.getMapStr(mp,"ftelnum"));
+            userInfo.setEmail(SysString.getMapStr(mp,"femail"));
+
+        }catch (Exception e){
+            throw e;
+        }
+        return userInfo;
     }
 
     @Override

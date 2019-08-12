@@ -1,4 +1,4 @@
-package com.ts.system.CaseManager.UI;
+package com.ts.casemanage.UI;
 
 /**
  * Created by slq on 2019/8/11.

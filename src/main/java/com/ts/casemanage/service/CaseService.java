@@ -1,30 +1,30 @@
-package com.ts.system.CaseManager.dao;
+package com.ts.casemanage.service;
 
 import com.ts.entity.ResultInfo;
-import com.ts.system.CaseManager.UI.CaseInfo;
-import com.ts.system.newsManager.UI.NewsInfo;
+import com.ts.casemanage.UI.CaseInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by slq on 2019/8/11.
  */
-public interface CaseDao {
+public interface CaseService {
     /***
-     * 新增
+    * 新增
      *
      * @param caseInfo 案例
-     * @param b  图片
+     * @param file  图片
      * @return
-     */
-    public ResultInfo add(CaseInfo caseInfo, byte [] b);
+             */
+    public ResultInfo add(CaseInfo caseInfo, MultipartFile file);
 
     /***
      * 修改
      *
      * @param caseInfo  案例
-     * @param b 图片
+     * @param file 图片
      * @return
      */
-    public ResultInfo edit(CaseInfo caseInfo, byte [] b);
+    public ResultInfo edit(CaseInfo caseInfo,  MultipartFile file);
 
     /***
      * 删除
@@ -49,7 +49,4 @@ public interface CaseDao {
      * @return
      */
     public ResultInfo get(int iID);
-
-
-
 }

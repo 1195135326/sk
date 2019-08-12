@@ -1,16 +1,15 @@
-package com.ts.system.CaseManager.dao;
+package com.ts.casemanage.dao;
 
-import com.ts.comm.SysDate;
 import com.ts.comm.SysString;
 import com.ts.common.Utils;
 import com.ts.entity.ResultInfo;
 import com.ts.file.SysFile;
 import com.ts.jdbc.SysDB;
-import com.ts.system.CaseManager.UI.CaseInfo;
+import com.ts.casemanage.UI.CaseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.util.HashMap;
@@ -219,6 +218,24 @@ public class CaseDaoImpl implements CaseDao {
         return resultInfo;
     }
 
+
+    public String getBaseImg(String imgPath) throws Exception {
+
+        InputStream in = null;
+        byte[] data = null;
+        try {
+            in = new FileInputStream(imgPath);
+            data = new byte[in.available()];
+            in.read(data);
+            in.close();
+        } catch (Exception e) {
+            throw e;
+        }
+        //进行Base64编码
+        BASE64Encoder encoder = new BASE64Encoder();
+        return encoder.encode(data);
+    }
+
     /***
      * 查询
      *
@@ -234,9 +251,18 @@ public class CaseDaoImpl implements CaseDao {
         try{
             sb =  new StringBuffer();
             //修改
-            sb.append(" SELECT fid,fcatecode,ftitile,fpicpath,fcontent,fpicname,TO_CHAR(ftime,'yyyy-mm-dd hh24:mi:ss') ftime ");
-            sb.append("         FROM s_case ");
+            sb.append(" SELECT fid,fcatecode,ftitle,fpicpath,fcontent,fpicname,TO_CHAR(ftime,'yyyy-mm-dd hh24:mi:ss') ftime ");
+            sb.append("         FROM taxsoft.s_case ");
             list = SysDB.getRows(jdbcTemplate,sb.toString());
+
+            String sPath="";
+            for (Map map:list) {
+                sPath=SysString.getMapStr(map,"fpicpath")+"/"+SysString.getMapStr(map,"fpicname");
+                if(new File(sPath).exists())
+                {
+                    map.put("fpic",getBaseImg(sPath));
+                }
+            }
             resultInfo.setRows(list);
             resultInfo.setTotal(list.size());
         }catch (Exception e) {

@@ -70,13 +70,21 @@ public class UserController
 
     @PostMapping("/loginUser")
     @ResponseBody
-    public ResultInfo loginUser(@RequestParam("loginAccount") String username,
+    public ResultInfo loginUser(@RequestParam("loginAccount") String usercode,
                                 @RequestParam("loginPwd") String password){
-        ResultInfo rs = new ResultInfo();
-        rs.setsErrorMsg("");
-        UserInfo userInfo = new UserInfo();
-        userInfo.setUserName("无锡市滨湖区税务局");
-        rs.setObj(userInfo);
+        ResultInfo rs = userService.getPassWord(usercode);
+        UserInfo userInfo = (UserInfo)rs.getObj();
+        if(userInfo == null)
+        {
+            rs.setsErrorMsg("用户名密码错误");
+        }
+        else
+        {
+            if(!password.equals(userInfo.getLoginPassword()))
+            {
+                rs.setsErrorMsg("用户名密码错误");
+            }
+        }
         return rs;
     }
 

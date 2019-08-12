@@ -1,14 +1,13 @@
-package com.ts.system.CaseManager.control;
+package com.ts.casemanage.control;
 
 
 import com.ts.comm.SysJson;
 import com.ts.comm.SysNumber;
 import com.ts.comm.SysString;
 import com.ts.entity.ResultInfo;
-import com.ts.system.CaseManager.UI.CaseInfo;
-import com.ts.system.CaseManager.service.CaseService;
+import com.ts.casemanage.UI.CaseInfo;
+import com.ts.casemanage.service.CaseService;
 import com.ts.system.newsManager.UI.NewsInfo;
-import com.ts.system.newsManager.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

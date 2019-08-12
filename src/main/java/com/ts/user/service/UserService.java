@@ -14,4 +14,6 @@ public interface UserService
     public ResultInfo editUser(UserInfo userInfo);
 
     public ResultInfo delUser(UserInfo userInfo);
+
+    public ResultInfo getPassWord(String sUserCode);
 }
