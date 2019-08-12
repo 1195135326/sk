@@ -8,12 +8,16 @@
 <link rel="stylesheet" type="text/css" href="/TaxSoft/css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="/TaxSoft/css/reset.css"/>
 <script src="/TaxSoft/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/TaxSoft/js/jquery.form.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/TaxSoft/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="/TaxSoft/js/js_z.js"></script>
 <script type="text/javascript" src="/TaxSoft/js/banner.js"></script>
 <script src="/TaxSoft/js/search.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="/TaxSoft/css/thems.css">
 <link rel="stylesheet" type="text/css" href="/TaxSoft/css/responsive.css">
+<link rel="stylesheet" type="text/css" href="/TaxSoft/css/login.css">
+
+<script type="text/javascript" src="/TaxSoft/js/login.js"></script>
 <style type="text/css">
 .xiaoguo img {
 transition: .1s transform;
@@ -103,29 +107,6 @@ $(function(){
 		$("#maeginL li").css("margin-left","0");
 	}
 </script>
-
-
-<!--<div class="i_m row" style="background:#f3f3f3; width: 100%; margin-top: 6px;">-->
-	<!--<div class="i_name" style="color: #005bac;">-->
-		<!--<p style="font-size: 36px;">Industry solutions</p>-->
-        <!--<p style="margin-top: 10px;">行业解决方案</p>-->
-        <!--<p style="margin-top: 10px;">多行业定制化的解决方案</p>-->
-    <!--</div>-->
-    <!--<div class="row hangOa">-->
-    	<!--<div  style="margin-left: -6vw;">-->
-    	<!--<a href="/TaxSoft/solve-1.html" class="col-lg-1 col-lg-push-3 col-xs-5 col-xs-push-1">化妆品行业</a>-->
-    	<!--<a href="/TaxSoft/solve-1.html" class="col-lg-1 col-lg-push-3 col-xs-5 col-xs-push-1">白酒行业</a>-->
-    	<!--<a href="/TaxSoft/solve-1.html" class="col-lg-1 col-lg-push-3 col-xs-5 col-xs-push-1">农产品行业</a>-->
-    	<!--<a href="/TaxSoft/solve-1.html" class="col-lg-1 col-lg-push-3 col-xs-5 col-xs-push-1">日化行业</a>-->
-    	<!--<a href="/TaxSoft/solve-1.html" class="col-lg-1 col-lg-push-3 col-xs-5 col-xs-push-1">医药行业</a>-->
-    	<!--<a href="/TaxSoft/solve-1.html" class="col-lg-1 col-lg-push-3 col-xs-5 col-xs-push-1">母婴及乳制品行业</a>-->
-        <!--</div> -->
-    <!--</div>-->
-    <!--<div class="moreOa">-->
-    	<!--<a href="/TaxSoft/solve-1.html" class="">更多方案>></a>-->
-    <!--</div>-->
-<!--</div>-->
-
 <div class="i_m row" style="background:white; width: 100%; margin-top: 6px;">
 	<div class="i_name" style="color: #777777;">
 		<p style="font-size: 36px;">Case introduction</p>
@@ -191,8 +172,7 @@ $(function(){
 <div class="i_m row" style="background:white; width: 100%; margin-top: 6px;">
 	<div class="i_name" style="color: #777777;">
 		<p style="font-size: 36px;">News</p>
-        <p style="margin-top: 10px;">行业中心</p>
-        <p style="margin-top: 10px;">了解最新新闻动态</p>
+        <p style="margin-top: 10px;">新闻中心</p>
     </div>
     <div class=" container-fluid" style="">
     	<ul class="row" style="color: #777777;">
@@ -278,6 +258,62 @@ $(function(){
    document.getElementById("scrollcopy").innerHTML = document.getElementById("scrollcon").innerHTML;
    MyMar=setInterval(Marquee,speed);
 </script>
+<script>
 
+	function submitForm() {
+		// jquery 表单提交
+		$("#loginUser").ajaxSubmit(function(data) {
+			// 对于表单提交成功后处理，message为表单正常提交后返回的内容
+			if(data.sErrorMsg != null){
+				$('#loginAccount').val('');
+				$('#loginPwd').val('');
+				var box = document.querySelector("#code-box"),
+						progress = box.querySelector("p"),
+						codeInput = box.querySelector('.code-input'),
+						evenBox = box.querySelector("span");
+				progress.innerText = '';
+				progress.style.backgroundColor = "#FFFF99";
+				progress.style.width = '0px';
+				evenBox.style.left = '0px';
+				$('#myModal').modal('hide');
+				$("#accountName").css('visibility','unset');
+				$("#exit").css('visibility','unset');
+				$("#btnlogin").css('visibility','hidden');
+				$("#accountName").html(data.obj.userName);
+
+			}else{
+				alert(data.sErrorMsg);
+			}
+		});
+		return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+	}
+
+
+	window.addEventListener('load',function(){
+		var code = "";
+		$.ajax({
+			url:"/TaxSoft/user/randomCode",
+			type:"get",
+			data:"",
+			contentType:"application/json",
+			dataType:"json",
+			success:function (data,textStatus) {
+				code = data;
+				codeFn = new moveCode(code);
+			}
+		});
+		//code是后台传入的验证字符串
+
+		//获取当前的code值
+		//console.log(codeFn.getCode());
+
+		//改变code值
+		//code = '46asd546as5';
+		//codeFn.setCode(code);
+
+		//重置为初始状态
+		//codeFn.resetCode();
+	});
+</script>
 </body>
 </html>

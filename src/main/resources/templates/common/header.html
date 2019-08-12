@@ -1,6 +1,6 @@
 
 <!--头部-->
-<div class="header" style="border-bottom: 1px solid #005bac;background-color:#33AECC;">
+<div class="header" style="border-bottom: 1px solid #005bac;background-color:#005BAC;">
 	
     <div class="head clearfix">
         <div class="logo"><a href=""><img src="/TaxSoft/img/common/logo.png" alt=""; style="height:50px;margin-top:12px;"/></a></div>
@@ -12,6 +12,7 @@
         <div class="nav_m">
             <div class="n_icon" style="right: 110px;"></div>
             <ul class="nav clearfix">
+
                 <li class="now"><a href="index.html">首页</a></li>
                 <li>
                     <a href="html/security-1.html">公司风采</a>
@@ -19,7 +20,7 @@
                         <div class="er_m">
                             <ul style="height:120px;border-right: none;width: 23%;taxt-align:center;">
                                 <li><a href="">企业文化</a></li>
-                                <li><a href="">关于我们</a></li>
+                                <li><a href="">公司简介</a></li>
                                 <li><a href="">联系我们</a></li>
                             </ul>
                         </div>
@@ -70,29 +71,55 @@
                     <a href="html/about-1.html">经典案例</a>
                 </li>
 
-                <label class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;font-family: 宋体;font-size:16px;margin-left:180px;margin-top:60px;background-color:#33AECC;border:none;" onmouseover="this.style.color='blue'" onmouseout="this.style.color='white'">登录
-                </label>
+                <label style="color:white;font-family: 宋体;font-size:14px;margin-right:-50px;font-weight:lighter;float:right;margin-top:5px;visibility: hidden;display: block" id="accountName">用户:xxx</label>
+                <label class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;font-family: 宋体;font-size:14px;background-color:#005BAC;border:none;;display: block;postion:absolute;margin-right:-50px;float:right;margin-top:38px;" onmouseover="this.style.color='red'" onmouseout="this.style.color='white'" id="btnlogin">登录</label>
+                <!--<div style="background-color: #00a1d2;height: 20px;width:2px;float:;margin-right:40px;margin-top:30px"></div>-->
+                <label style="color:white;font-family: 宋体;font-size:14px;postion:absolute;margin-right:-100px;font-weight:lighter;float:right;display: block;margin-top:44px;visibility: hidden"  onmouseover="this.style.color='red'" onmouseout="this.style.color='white'" id="exit">注销</label>
 
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel">用户登录</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="input-div">
-                                    <label class="lb-input-1">登录账号:</label><input type="text" class="input-user" id="loginAccount" /><br/>
-                                    <label class="lb-input-2">登录密码:</label><input type="text" class="input-user" id="loginPassword" />
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                <button type="button" class="btn btn-primary" id="btnSubmit">确定</button>
-                            </div>
+                    <div class="modal-dialog" style="text-align: -webkit-center;margin-top: 15%">
+                        <div class="modal-content" style="width: 450px;height: 250px;padding-top: 20px;padding-right: 40px">
+
+                            <form action="/TaxSoft/user/loginUser" method="post" id="loginUser" onsubmit="return submitForm()" >
+                                <label class="form-inline" style="margin-left: -10px;margin-top: 10px ">
+                                    <div class="form-inline-font">
+                                        用户名 :
+                                    </div>
+                                    <div class="form-inline-input">
+                                        <input type="text" name="loginAccount" maxlength="50" id="loginAccount"/>
+                                    </div>
+                                </label>
+                                <label class="form-inline" style="margin-left: -10px;margin-top: 10px ">
+                                    <div class="form-inline-font">
+                                        密码 :
+                                    </div>
+                                    <div class="form-inline-input">
+                                        <input type="password" name="loginPwd" maxlength="50" id="loginPwd"/>
+                                    </div>
+                                </label>
+                                <label class="form-inline" style="margin-left: -10px;margin-top: 10px ">
+                                    <div class="form-inline-font">
+                                        验证 :
+                                    </div>
+                                    <div class="form-inline-input">
+                                        <div class="code-box" id="code-box">
+                                            <input type="text" name="code" class="code-input" />
+                                            <p></p>
+                                            <span id="sliver">>>></span>
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="login-btn">
+                                    <button type="submit" style="margin-left: 20px;" id="loginbtn">登录</button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
 
             </ul>
+
         </div>
     </div>
 </div>
