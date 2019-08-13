@@ -123,7 +123,7 @@ create table s_position (
    fneednum             numeric(10)          null,
    fminpay              numeric(20,2)        null,
    fmaxpay              numeric(20,2)        null,
-   fpotsdesc            text                 null,
+   fpostdesc            text                 null,
    fpostreq             text                 null,
    fpublishdate         char(10)             null,
    fenddate             char(10)             null,
