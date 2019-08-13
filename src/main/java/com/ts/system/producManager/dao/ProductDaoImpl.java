@@ -241,7 +241,7 @@ public class ProductDaoImpl implements ProductDao {
             sb =  new StringBuffer();
             //查询
             sb.append(" SELECT fid,fcatecode,fname,fpublishdate,fcontent ");
-            sb.append("         ,furl,fresourcepath,ftime,fresourcename FROM s_product ");
+            sb.append("         ,furl,fresourcepath,ftime,fresourcename FROM taxsoft.s_product ");
             list = SysDB.getRows(jdbcTemplate,sb.toString());
             resultInfo.setRows(list);
             resultInfo.setTotal(list.size());

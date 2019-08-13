@@ -254,13 +254,28 @@ public class CaseDaoImpl implements CaseDao {
             sb.append(" SELECT fid,fcatecode,ftitle,fpicpath,fcontent,fpicname,TO_CHAR(ftime,'yyyy-mm-dd hh24:mi:ss') ftime ");
             sb.append("         FROM taxsoft.s_case ");
             list = SysDB.getRows(jdbcTemplate,sb.toString());
+            String sPaths = this.getClass().getResource("").getPath();
+
+//            System.out.println(sPaths);
+//            System.out.println(java.net.URLDecoder.decode(sPaths, "utf-8"));
+
+            sPaths = java.net.URLDecoder.decode(sPaths, "utf-8");
+            sPaths = sPaths.substring(1,sPaths.indexOf("classes")+7);
+            sPaths = sPaths+"/static"+"/tmp/showcase";
+            File f = null;
 
             String sPath="";
             for (Map map:list) {
                 sPath=SysString.getMapStr(map,"fpicpath")+"/"+SysString.getMapStr(map,"fpicname");
-                if(new File(sPath).exists())
+                f = new File(sPaths+"/"+SysString.getMapStr(map,"fid"));
+                if(!f.exists())
                 {
-                    map.put("fpic",getBaseImg(sPath));
+                    f.mkdirs();
+                }
+                SysFile.copyFile(sPath,sPaths+"/"+SysString.getMapStr(map,"fid")+"/"+SysString.getMapStr(map,"fpicname"));
+                if(new File(sPaths+"/"+SysString.getMapStr(map,"fid")+"/"+SysString.getMapStr(map,"fpicname")).exists())
+                {
+                    map.put("fpic","/TaxSoft/tmp/showcase/"+SysString.getMapStr(map,"fid")+"/"+SysString.getMapStr(map,"fpicname"));
                 }
             }
             resultInfo.setRows(list);

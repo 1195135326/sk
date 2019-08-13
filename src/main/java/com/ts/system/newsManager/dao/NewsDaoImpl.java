@@ -326,9 +326,37 @@ public class NewsDaoImpl implements NewsDao {
         try{
             sb =  new StringBuffer();
             //修改
-            sb.append(" SELECT fid,fcatecode,ftitile,fdesc,fcontent,TO_CHAR(fdatetime,'yyyy-mm-dd hh24:mi:ss') fdatetime ");
-            sb.append("         ,fishot,fnoshow,ftime,fpicname FROM s_news ");
+            sb.append(" SELECT fid,fcatecode,ftitle,fpicpath,fdesc,fcontent,fdatetime ");
+            sb.append("         ,fishot,fnoshow,ftime,fpicname FROM taxsoft.s_news order by fid");
             list = SysDB.getRows(jdbcTemplate,sb.toString());
+
+            String sPaths = this.getClass().getResource("").getPath();
+
+//            System.out.println(sPaths);
+//            System.out.println(java.net.URLDecoder.decode(sPaths, "utf-8"));
+
+            sPaths = java.net.URLDecoder.decode(sPaths, "utf-8");
+            sPaths = sPaths.substring(1,sPaths.indexOf("classes")+7);
+            sPaths = sPaths+"/static"+"/tmp/shownews";
+            File f = null;
+
+            String sPath="";
+            for (Map map:list) {
+                sPath=SysString.getMapStr(map,"fpicpath")+"/"+SysString.getMapStr(map,"fpicname");
+                f = new File(sPaths+"/"+SysString.getMapStr(map,"fid"));
+                if(!f.exists())
+                {
+                    f.mkdirs();
+                }
+                SysFile.copyFile(sPath,sPaths+"/"+SysString.getMapStr(map,"fid")+"/"+SysString.getMapStr(map,"fpicname"));
+                if(new File(sPaths+"/"+SysString.getMapStr(map,"fid")+"/"+SysString.getMapStr(map,"fpicname")).exists())
+                {
+                    map.put("fpic","/TaxSoft/tmp/shownews/"+SysString.getMapStr(map,"fid")+"/"+SysString.getMapStr(map,"fpicname"));
+                }
+            }
+
+
+
             resultInfo.setRows(list);
             resultInfo.setTotal(list.size());
         }catch (Exception e) {
